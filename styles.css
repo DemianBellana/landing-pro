@@ -36,8 +36,8 @@
   --shadow-lg: 0 12px 40px rgba(0,0,0,0.09), 0 4px 12px rgba(0,0,0,0.05);
   --shadow-xl: 0 24px 64px rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.06);
 
-  --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-fast: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-fast: 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   --max-width: 1280px;
   --gutter: clamp(24px, 5vw, 80px);
@@ -50,12 +50,10 @@
   padding: 0;
 }
 
-html, body {
+html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  width: 100%;
 }
 
 body {
@@ -1672,33 +1670,10 @@ button { cursor: none; border: none; background: none; font-family: inherit; }
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-
-/* ── Tablet landscape (≤ 1024px) ── */
 @media (max-width: 1024px) {
   .hero {
     display: block;
     padding: 0;
-  }
-
-  .hero-inner {
-    grid-template-columns: 1fr;
-    gap: 48px;
-    padding-top: 120px;
-    padding-bottom: 80px;
-  }
-
-  .hero-visual {
-    justify-content: center;
-  }
-
-  .hero-mockup {
-    max-width: 420px;
-    margin: 0 auto;
-  }
-
-  .floating-card,
-  .floating-badge {
-    display: none;
   }
 
   .services-grid {
@@ -1707,7 +1682,6 @@ button { cursor: none; border: none; background: none; font-family: inherit; }
 
   .dif-layout {
     grid-template-columns: 1fr;
-    gap: clamp(40px, 6vw, 60px);
   }
 
   .dif-left {
@@ -1722,97 +1696,19 @@ button { cursor: none; border: none; background: none; font-family: inherit; }
     grid-column: span 2;
     grid-template-columns: 1fr;
   }
-
-  .pc-visual {
-    max-height: 280px;
-    overflow: hidden;
-  }
 }
 
-/* ── Tablet portrait / large mobile (≤ 768px) ── */
 @media (max-width: 768px) {
-  /* Navbar */
-  .nav-links,
-  .nav-cta { display: none; }
+  .nav-links, .nav-cta { display: none; }
   .nav-toggle { display: flex; }
 
-  /* Hero */
-  .hero-inner {
-    padding-top: 100px;
-    padding-bottom: 60px;
-    gap: 40px;
-  }
-
-  .hero-headline {
-    font-size: clamp(38px, 9vw, 52px);
-  }
-
-  .hero-sub {
-    font-size: 16px;
-    max-width: 100%;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-    margin-bottom: 40px;
-  }
-
-  .hero-actions .btn-primary,
-  .hero-actions .btn-ghost {
-    width: 100%;
-    justify-content: center;
-    padding: 16px 24px;
-    font-size: 16px;
-  }
-
-  .hero-stats {
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .stat-num {
-    font-size: 24px;
-  }
-
-  .hero-scroll {
-    display: none;
-  }
-
-  /* Services */
   .services-grid {
     grid-template-columns: 1fr;
     border-radius: var(--radius-lg);
   }
 
-  .service-item {
-    padding: clamp(28px, 5vw, 40px);
-  }
-
-  /* Diferencial */
-  .dif-block {
-    gap: 16px;
-    padding: 24px 0;
-  }
-
-  /* Metrics */
-  .metrics-row {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .metric {
-    padding: clamp(24px, 4vw, 36px);
-  }
-
-  .metric-value {
-    font-size: clamp(32px, 8vw, 44px);
-  }
-
-  /* Projects */
   .projects-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
   }
 
   .project-card--main {
@@ -1820,184 +1716,25 @@ button { cursor: none; border: none; background: none; font-family: inherit; }
     grid-template-columns: 1fr;
   }
 
-  /* Section headers */
-  .section-title {
-    font-size: clamp(30px, 7.5vw, 42px);
+  .metrics-row {
+    grid-template-columns: 1fr 1fr;
   }
 
-  .section-desc {
-    font-size: 15px;
-  }
-
-  .section-header {
-    margin-bottom: clamp(40px, 6vw, 64px);
-  }
-
-  /* CTA final */
-  .cta-title {
-    font-size: clamp(36px, 9vw, 56px);
-  }
-
-  .cta-sub {
-    font-size: 16px;
-  }
-
-  .cta-actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
-
-  .cta-actions .btn-primary,
-  .cta-actions .btn-ghost {
-    width: 100%;
-    justify-content: center;
-    padding: 16px 24px;
-    font-size: 16px;
-  }
-
-  /* Testimonial */
-  .testimonial-text {
-    font-size: clamp(18px, 4.5vw, 24px);
-  }
-
-  /* Footer */
   .footer-top {
     flex-direction: column;
-    gap: 40px;
-  }
-
-  .footer-nav {
-    gap: 32px;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-}
-
-/* ── Mobile (≤ 480px) ── */
-@media (max-width: 480px) {
-  :root {
-    --gutter: 20px;
-  }
-
-  /* Navbar */
-  .nav-inner {
-    height: 60px;
-  }
-
-  .logo-text {
-    font-size: 14px;
-  }
-
-  /* Hero */
-  .hero-inner {
-    padding-top: 84px;
-    padding-bottom: 48px;
-  }
-
-  .hero-badge {
-    font-size: 12px;
-    padding: 6px 12px;
-  }
-
-  .hero-headline {
-    font-size: clamp(34px, 10vw, 44px);
-    margin-bottom: 20px;
-  }
-
-  .hero-sub {
-    font-size: 15px;
-    margin-bottom: 32px;
-  }
-
-  .hero-actions {
-    margin-bottom: 32px;
   }
 
   .hero-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 20px;
   }
 
-  .stat-divider {
+  .hero-scroll {
     display: none;
   }
+}
 
-  /* Mock-up — ocultar en pantallas muy pequeñas para aligerar */
-  .hero-visual {
-    display: none;
-  }
-
-  /* Services */
-  .service-item {
-    padding: 24px 20px;
-  }
-
-  .si-title {
-    font-size: 19px;
-  }
-
-  /* Metrics */
+@media (max-width: 480px) {
   .metrics-row {
     grid-template-columns: 1fr;
-    gap: 1px;
-  }
-
-  .metric {
-    padding: 28px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .metric-value {
-    font-size: clamp(36px, 10vw, 48px);
-    margin-bottom: 0;
-  }
-
-  .metric-label {
-    text-align: right;
-    max-width: 120px;
-  }
-
-  /* Section title más compacto */
-  .section-title {
-    font-size: clamp(28px, 8vw, 36px);
-  }
-
-  /* CTA */
-  .cta-title {
-    font-size: clamp(32px, 10vw, 44px);
-  }
-
-  /* Mobile menu links más pequeños en 320-380px */
-  .mobile-link {
-    font-size: clamp(28px, 9vw, 44px);
-  }
-
-  /* Quote mark decorativo — reducir */
-  .quote-mark {
-    font-size: 80px;
-  }
-
-  /* Footer */
-  .footer-nav {
-    flex-direction: column;
-    gap: 28px;
-  }
-
-  .footer-copy,
-  .footer-made {
-    font-size: 12px;
-  }
-
-  /* Scroll progress más visible en móvil */
-  .scroll-progress {
-    height: 3px;
   }
 }

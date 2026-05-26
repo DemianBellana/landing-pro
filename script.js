@@ -6,6 +6,80 @@
 'use strict';
 
 // ─────────────────────────────────────────────────
+// HERO LAYOUT PATCH
+// Properly structure the hero section at runtime
+// ─────────────────────────────────────────────────
+(function patchHeroLayout() {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+
+  const heroBg   = hero.querySelector('.hero-bg');
+  const content  = hero.querySelector('.hero-content');
+  const visual   = hero.querySelector('.hero-visual');
+  const scroll   = hero.querySelector('.hero-scroll');
+
+  // Build inner grid wrapper
+  const inner = document.createElement('div');
+  inner.className = 'hero-inner';
+
+  if (content) inner.appendChild(content);
+  if (visual)  inner.appendChild(visual);
+
+  // Re-assemble hero
+  if (heroBg)  hero.insertBefore(inner, heroBg.nextSibling);
+  else         hero.insertBefore(inner, hero.firstChild);
+
+  if (scroll) hero.appendChild(scroll);
+
+  // Apply grid styles directly
+  Object.assign(inner.style, {
+    maxWidth: 'var(--max-width)',
+    margin: '0 auto',
+    padding: '140px var(--gutter) 100px',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    alignItems: 'center',
+    gap: '60px',
+    position: 'relative',
+    zIndex: '1',
+    width: '100%',
+    boxSizing: 'border-box',
+  });
+
+  // Restore content styles
+  if (content) {
+    content.style.cssText = '';
+    content.style.display = 'flex';
+    content.style.flexDirection = 'column';
+    content.style.alignItems = 'flex-start';
+  }
+
+  if (visual) {
+    visual.style.cssText = '';
+    visual.style.display = 'flex';
+    visual.style.justifyContent = 'flex-end';
+    visual.style.position = 'relative';
+  }
+
+  // Responsive: collapse to single column on small screens
+  function checkHeroLayout() {
+    if (window.innerWidth <= 768) {
+      inner.style.gridTemplateColumns = '1fr';
+      inner.style.padding = '120px var(--gutter) 80px';
+      if (visual) visual.style.display = 'none';
+    } else {
+      inner.style.gridTemplateColumns = '1fr 1fr';
+      inner.style.padding = '140px var(--gutter) 100px';
+      if (visual) visual.style.display = 'flex';
+    }
+  }
+
+  checkHeroLayout();
+  window.addEventListener('resize', checkHeroLayout);
+})();
+
+
+// ─────────────────────────────────────────────────
 // CUSTOM CURSOR
 // ─────────────────────────────────────────────────
 (function initCursor() {
@@ -137,11 +211,16 @@
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -60px 0px'
+    threshold: 0.01, // Lower threshold for better detection
+    rootMargin: '100px' // Larger margin
   });
 
   elements.forEach(el => observer.observe(el));
+
+  // Fallback: Reveal all after 1.5s if not already revealed
+  setTimeout(() => {
+    elements.forEach(el => el.classList.add('visible'));
+  }, 1500);
 })();
 
 
